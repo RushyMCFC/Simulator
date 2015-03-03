@@ -2,6 +2,7 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -48,15 +49,17 @@ public class ViewMain extends JFrame {
 		up_down.add(upButton);
 		up_down.add(downButton);
 		
-		heartDiseaseLabel=new JLabel("add heart disease");
-		heartDiseaseText=new JTextField(15);
+		heartDiseaseLabel=new JLabel("Select Heart Disease : ");
 		JPanel heartDiseasePanel = new JPanel();
+		ArrayList<String> diseasesList = obj.getDiseases();
+		String allDiseases[] = diseasesList.toArray(new String[diseasesList.size()]);
+		final JComboBox<String> heartDiseaseOptions = new JComboBox<String>(allDiseases);
+		JButton heartDiseaseButton = new JButton("OK");
 		heartDiseasePanel.add(heartDiseaseLabel);
-		heartDiseasePanel.add(heartDiseaseText);
+		heartDiseasePanel.add(heartDiseaseOptions);
+		heartDiseasePanel.add(heartDiseaseButton);
 		
-		String []ntl={"heart fault","aaa","bbb"};
-		jcb1=new JComboBox(ntl);
-		jlb4=new JLabel("Heart details");
+		jlb4=new JLabel("Heart Details");
 		jlb5=new JLabel("Pacemaker Details");
 		jlb6=new JLabel("Output");
 		jlb7=new JLabel("Disease not found");
@@ -80,6 +83,7 @@ public class ViewMain extends JFrame {
                 validate();
             }
         });  
+		
 		downButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
@@ -91,6 +95,19 @@ public class ViewMain extends JFrame {
                 validate();
             }
         });  
+		
+		heartDiseaseButton.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+            	String diseaseName = heartDiseaseOptions.getSelectedItem().toString();
+                obj.setHeartDisease(diseaseName);
+                heartDetailsPanel.removeAll();
+                refreshHeartRate();
+                validate();
+            }
+        });
 		
 		//add accessory
 		this.add(jssp2);
