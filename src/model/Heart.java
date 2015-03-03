@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.Random;
 
 public final class Heart implements HeartInterface {
     private int heartbeat;
@@ -20,7 +21,7 @@ public final class Heart implements HeartInterface {
     public void setHeartStatus(String status) {
             if (status == null)
                 throw new NullPointerException("Null heart status input");
-            else if (status == "")
+            else if (status.equals(""))
                 this.heartStatus = "Normal";
             else
                 this.heartStatus = status;
@@ -50,10 +51,7 @@ public final class Heart implements HeartInterface {
     }
 
     @Override
-    public String getHeartDisease() {
-        return this.currentDisease;
-
-    }
+    public String getHeartDisease() {return this.currentDisease; }
 
     @Override
     public void setHeartDisease(String aDisease) {
@@ -100,9 +98,15 @@ public final class Heart implements HeartInterface {
 
     private void applyDiseaseEffects()
     {
-        if(this.currentDisease.equals("arrhythmia"))
+        if(this.currentDisease.equals("bradyarrhythmia"))
         {
-
+            Random heartBeatLow = new Random();
+            this.heartbeat= heartBeatLow.nextInt(50);
+        }
+        if(this.currentDisease.equals("tachyarrhythmia"))
+        {
+            Random heartBeatLow = new Random();
+            this.heartbeat= heartBeatLow.nextInt(25) + 100;
         }
         if(this.currentDisease.equals("sinoatrical block"))
         {
