@@ -12,10 +12,10 @@ import model.Heart;
 public class ViewMain extends JFrame {
 	Heart obj = Heart.getHeartInstance();
 	//define
-	JPanel jp1,jp2, jp3,jp4,jp5,jp6,jp7,jp8;
-    JButton jb1,jb2,jb3,jb4,jb5;
-    JLabel jlb1,jlb2,jlb3,jlb4,jlb5,jlb6,jlb7,jlb8;
-    JTextField jtf1;
+	JPanel actionPanel,jp2, jp3,heartDetailsPanel,jp5,jp6,jp7,jp8;
+    JButton detachPacemakerButton,emptyBatteryButton,upButton,downButton,jb5;
+    JLabel actionLabel,heartbeatLabel,heartDiseaseLabel,jlb4,jlb5,jlb6,jlb7,jlb8;
+    JTextField heartDiseaseText;
     JScrollPane jsp1;
     JComboBox jcb1;
     JList jlist;
@@ -28,19 +28,33 @@ public class ViewMain extends JFrame {
 	public ViewMain()
 	{
 		// create accessory
-		jp1=new JPanel();
+		actionPanel=new JPanel(new GridLayout(4,1));
 		jp2=new JPanel();
 		jp3=new JPanel();
-		jp4=new JPanel(new GridLayout(4,1));
+		heartDetailsPanel=new JPanel(new GridLayout(4,1));
 		jp5=new JPanel();
-		jlb1=new JLabel("Actions");
-		jb1 =new JButton ("Detach pacemaker");
-		jb2 =new JButton ("Empty battery");
-		jlb2=new JLabel("heart beat rate");
-		jb3 =new JButton ("up");
-		jb4 =new JButton ("down");
-		jlb3=new JLabel("add heart disease");
-		jtf1=new JTextField(15);
+		
+		actionLabel=new JLabel("Actions");
+		detachPacemakerButton =new JButton ("Detach pacemaker");
+		emptyBatteryButton =new JButton ("Empty battery");
+		JPanel dp_eb = new JPanel();
+		dp_eb.add(detachPacemakerButton);
+		dp_eb.add(emptyBatteryButton);
+		
+		heartbeatLabel=new JLabel("heart beat rate");
+		upButton =new JButton ("up");
+		downButton =new JButton ("down");
+		JPanel up_down = new JPanel();
+		up_down.add(heartbeatLabel);
+		up_down.add(upButton);
+		up_down.add(downButton);
+		
+		heartDiseaseLabel=new JLabel("add heart disease");
+		heartDiseaseText=new JTextField(15);
+		JPanel heartDiseasePanel = new JPanel();
+		heartDiseasePanel.add(heartDiseaseLabel);
+		heartDiseasePanel.add(heartDiseaseText);
+		
 		String []ntl={"heart fault","aaa","bbb"};
 		jcb1=new JComboBox(ntl);
 		jlb4=new JLabel("Heart details");
@@ -48,7 +62,7 @@ public class ViewMain extends JFrame {
 		jlb6=new JLabel("Output");
 		jlb7=new JLabel("Disease not found");
 		jlb8=new JLabel("Image");
-		jssp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,jp4,jp1);
+		jssp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,heartDetailsPanel,actionPanel);
 		jssp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,jssp,jp5);
 		jssp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,jssp1,jp3);
 		
@@ -56,24 +70,24 @@ public class ViewMain extends JFrame {
 		refreshHeartRate();
 		
 		//Increasing and Decreasing Heart Rate
-		jb3.addActionListener(new ActionListener() {
+		upButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
             {
                 //Execute when button is pressed
                 obj.increaseHeartRate();
-                jp4.removeAll();
+                heartDetailsPanel.removeAll();
                 refreshHeartRate();
                 validate();
             }
         });  
-		jb4.addActionListener(new ActionListener() {
+		downButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
             {
                 //Execute when button is pressed
                 obj.decreaseHeartRate();
-                jp4.removeAll();
+                heartDetailsPanel.removeAll();
                 refreshHeartRate();
                 validate();
             }
@@ -81,15 +95,21 @@ public class ViewMain extends JFrame {
 		
 		//add accessory
 		this.add(jssp2);
-		jp1.add(jlb1);
-		jp1.add(jb1);
-		jp1.add(jb2);
+		actionPanel.add(actionLabel);
 		
-		jp1.add(jlb2);
-		jp1.add(jb3);
-		jp1.add(jb4);
-		jp1.add(jlb3);
-		jp1.add(jtf1);
+		actionPanel.add(dp_eb);
+		//actionPanel.add(jb1);
+		//actionPanel.add(jb2);
+		
+		actionPanel.add(up_down);
+		//actionPanel.add(heartbeatLabel);
+		//actionPanel.add(upButton);
+		///actionPanel.add(downButton);
+		
+		actionPanel.add(heartDiseasePanel);
+		//actionPanel.add(heartDiseaseLabel);
+		//actionPanel.add(heartDiseaseText);
+		
 		jp2.add(jlb8);
 		jp3.add(jlb6);
 		jp3.add(jlb7);
@@ -124,14 +144,14 @@ public class ViewMain extends JFrame {
 	{
 		int totalBeats = obj.getHeartBeat();
 		String status = obj.getHeartStatus();
-		Disease disease = obj.getHeartDisease();
+		String disease = obj.getHeartDisease();
 		JLabel hBeat = new JLabel("Heart beat rate : "+totalBeats+"/min");
 		JLabel hStatus = new JLabel("Heart Status : "+status);
 		JLabel hDisease = new JLabel("Heart Disease : "+disease);
-		jp4.add(jlb4);
-		jp4.add(hBeat);
-		jp4.add(hStatus);
-		jp4.add(hDisease);
+		heartDetailsPanel.add(jlb4);
+		heartDetailsPanel.add(hBeat);
+		heartDetailsPanel.add(hStatus);
+		heartDetailsPanel.add(hDisease);
 	}
 
 }
