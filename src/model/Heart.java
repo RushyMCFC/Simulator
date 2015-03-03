@@ -1,9 +1,16 @@
 package model;
 
+
+
 public final class Heart implements HeartInterface {
     private int heartbeat;
     private String heartStatus;
-    private Disease heartDisease;
+    //Sinoatrical
+    private boolean SA;
+    //Atrioventricular
+    private boolean AV;
+    private String currentDisease;
+
 
 
 
@@ -11,9 +18,11 @@ public final class Heart implements HeartInterface {
 
     private Heart()
     {
+        this.currentDisease = "None";
+        this.SA = true;
+        this.AV = true;
         this.heartbeat= 67;
         this.heartStatus= "Normal";
-        this.heartDisease = new Disease();
     }
 
     public static Heart getHeartInstance()
@@ -31,17 +40,21 @@ public final class Heart implements HeartInterface {
     }
 
     @Override
-    public Disease getHeartDisease() {
-        return this.heartDisease;
+    public String getHeartDisease() {
+        return this.currentDisease;
 
     }
 
     @Override
-    public void setHeartDisease(Disease aDisease) {
+    public void setHeartDisease(String aDisease) {
         if (aDisease == null)
             throw new NullPointerException("Null disease input");
+        if(aDisease == "")
+            this.currentDisease= "None";
         else
-            this.heartDisease = aDisease;
+            this.currentDisease = aDisease;
+
+        this.applyDiseaseEffects();
 
     }
 
@@ -92,5 +105,17 @@ public final class Heart implements HeartInterface {
     @Override
     public void reset() {
         INSTANCE = new Heart();
+    }
+
+    private void applyDiseaseEffects()
+    {
+        if(this.currentDisease.equals("arrhythmia"))
+        {
+            
+        }
+        else
+        {
+            throw new IllegalArgumentException("Disease not recognised");
+        }
     }
 }

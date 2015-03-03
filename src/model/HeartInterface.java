@@ -18,13 +18,13 @@ public interface HeartInterface {
      *
      * @return heart disease
      */
-    public Disease getHeartDisease();
+    public String getHeartDisease();
 
     /**
      * Add a disease to the heart
      * @param aDisease
      */
-    public void setHeartDisease(Disease aDisease);
+    public void setHeartDisease(String aDisease);
 
     /**
      * increases heart rate by 1
