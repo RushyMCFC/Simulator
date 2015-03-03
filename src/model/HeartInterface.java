@@ -15,6 +15,11 @@ public interface HeartInterface {
     public String getHeartStatus();
 
     /**
+     * set the heart Status
+     */
+    public void setHeartStatus(String Status);
+
+    /**
      *
      * @return heart disease
      */
