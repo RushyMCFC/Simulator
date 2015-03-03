@@ -7,7 +7,6 @@ import javax.swing.*;
 
 import model.Disease;
 import model.Heart;
-import model.HeartInterface;
 
 
 public class ViewMain extends JFrame {
