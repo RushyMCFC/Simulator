@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public interface HeartInterface {
 
     /**
@@ -45,4 +47,11 @@ public interface HeartInterface {
      * reset the state of the heart
      */
     public void reset();
+
+    /**
+     *
+     * @return list of diseases
+     */
+    public ArrayList<String> getDiseases();
+
 }

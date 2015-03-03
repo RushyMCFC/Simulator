@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public final class Heart implements HeartInterface {
@@ -11,6 +12,7 @@ public final class Heart implements HeartInterface {
     //Atrioventricular
     private boolean AV;
     private String currentDisease;
+    private ArrayList<String> diseases;
 
 
 
@@ -34,6 +36,11 @@ public final class Heart implements HeartInterface {
         this.AV = true;
         this.heartbeat= 67;
         this.heartStatus= "Normal";
+        this.diseases = new ArrayList<String>();
+        diseases.add("arrhythmia");
+        diseases.add("bradyarrhythmia");
+        diseases.add("bradyarrhythmia");
+        diseases.add("tachyarrhythmia");
     }
 
     public static Heart getHeartInstance()
@@ -70,6 +77,7 @@ public final class Heart implements HeartInterface {
     public void increaseHeartRate() {
         if(this.heartbeat<120)
         this.heartbeat++;
+        this.updateStatus();
     }
 
 
@@ -78,6 +86,7 @@ public final class Heart implements HeartInterface {
     public void decreaseHeartRate() {
         if(this.heartbeat>0)
         this.heartbeat--;
+        this.updateStatus();
     }
 
     @Override
@@ -92,8 +101,7 @@ public final class Heart implements HeartInterface {
     }
 
     @Override
-    public void reset() {
-        INSTANCE = new Heart();
+    public void reset(){ INSTANCE = new Heart();
     }
 
     private void applyDiseaseEffects()
@@ -103,12 +111,12 @@ public final class Heart implements HeartInterface {
             Random heartBeatLow = new Random();
             this.heartbeat= heartBeatLow.nextInt(50);
         }
-        if(this.currentDisease.equals("tachyarrhythmia"))
+        else if(this.currentDisease.equals("tachyarrhythmia"))
         {
             Random heartBeatLow = new Random();
             this.heartbeat= heartBeatLow.nextInt(25) + 100;
         }
-        if(this.currentDisease.equals("sinoatrical block"))
+        else if(this.currentDisease.equals("sinoatrical block"))
         {
             this.AV = false;
         }
@@ -116,5 +124,35 @@ public final class Heart implements HeartInterface {
         {
             throw new IllegalArgumentException("Disease not recognised");
         }
+        this.updateStatus();
+    }
+    public ArrayList<String> getDiseases()
+    {
+         ArrayList<String> copyOfDiseases = new ArrayList<String>(this.diseases);
+        return copyOfDiseases;
+    }
+    private void updateStatus()
+    {
+       if (this.heartbeat<50 && this.heartbeat>=25)
+       {
+           this.setHeartStatus("Slower than normal");
+       }
+       else if (this.heartbeat<25)
+       {
+           this.setHeartStatus("Too slow needs urgent help!");
+       }
+       else if (this.heartbeat>100 && this.heartbeat<120)
+       {
+           this.setHeartStatus("Faster than normal");
+       }
+       else if (this.heartbeat>=120)
+       {
+           this.setHeartStatus("Too fast needs urgent help!");
+       }
+       else
+       {
+           this.setHeartStatus("Normal");
+       }
+
     }
 }
