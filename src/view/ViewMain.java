@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import model.Disease;
 import model.Heart;
 
 
