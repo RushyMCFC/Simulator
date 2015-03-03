@@ -101,8 +101,11 @@ public final class Heart implements HeartInterface {
     }
 
     @Override
-    public void reset(){ INSTANCE = new Heart();
-    }
+    public void reset(){  this.currentDisease = "None";
+        this.SA = true;
+        this.AV = true;
+        this.heartbeat= 67;
+        this.heartStatus= "Normal"; }
 
     private void applyDiseaseEffects()
     {
