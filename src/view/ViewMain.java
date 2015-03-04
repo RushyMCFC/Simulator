@@ -44,7 +44,7 @@ public class ViewMain extends JFrame {
 		jp2=new JPanel();
 		jp3=new JPanel();
         jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
-		heartDetailsPanel=new JPanel(new GridLayout(4,1));
+		heartDetailsPanel=new JPanel(new GridLayout(5,1));
 		jp5=new JPanel();
 		
 		actionLabel=new JLabel("Actions");
@@ -188,14 +188,17 @@ public class ViewMain extends JFrame {
 		int totalBeats = obj.getHeartBeat();
 		String status = obj.getHeartStatus();
 		String disease = obj.getHeartDisease();
+		String naturalStatus = obj.getNaturalStatus();
 		JLabel hBeat = new JLabel("Heart beat rate : "+totalBeats+"/min");
 		JLabel hStatus = new JLabel("Heart Status : "+status);
 		JLabel hDisease = new JLabel("Heart Disease : "+disease);
+		JLabel nStatus = new JLabel("Natural Pacemaker Status : "+naturalStatus);
        // JLabel htime = new JLabel(new Date().toString());
         heartDetailsPanel.add(jlb4);
 		heartDetailsPanel.add(hBeat);
 		heartDetailsPanel.add(hStatus);
 		heartDetailsPanel.add(hDisease);
+		heartDetailsPanel.add(nStatus);
 		//jp3.add(htime);
 	}
 	
