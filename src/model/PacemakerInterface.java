@@ -10,6 +10,6 @@ public interface PacemakerInterface {
     public int getBatteryLife();
     public void setBatterLife(int life);
     public String getStatus();
-    public void setStatus(String status);
+    public void setStatus();
     }
 

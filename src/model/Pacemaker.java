@@ -37,7 +37,7 @@ public class Pacemaker implements PacemakerInterface {
     	return status;
     }
     
-    public void setStatus(String status) {
+    public void setStatus() {
     	if(status.equals("Active")) {
     		this.status = "Not Active";
     	}

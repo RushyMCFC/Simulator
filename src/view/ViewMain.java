@@ -152,7 +152,7 @@ public class ViewMain extends JFrame {
 			 
             public void actionPerformed(ActionEvent e)
             {      edge(); 
-            	obj2.changeStatus();
+            	obj2.setStatus();
             	deletePacemakerDetails();
             }
         });  
