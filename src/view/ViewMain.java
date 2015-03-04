@@ -42,7 +42,7 @@ public class ViewMain extends JFrame {
 	//function
 	public void Start() throws InterruptedException {
 		// create accessory
-		actionPanel=new JPanel(new GridLayout(4,1));
+		actionPanel=new JPanel(new GridLayout(5,1));
 		jp2=new JPanel();
 		jp3=new JPanel();
         jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
@@ -73,6 +73,16 @@ public class ViewMain extends JFrame {
 		heartDiseasePanel.add(heartDiseaseLabel);
 		heartDiseasePanel.add(heartDiseaseOptions);
 		heartDiseasePanel.add(heartDiseaseButton);
+		
+		JLabel pacemakerModeLabel = new JLabel("Select Pacemaker Mode : ");
+		JPanel pacemakerModePanel = new JPanel();
+		ArrayList<String> am = obj2.getModes();
+		String allModes[] = am.toArray(new String[am.size()]);
+		final JComboBox<String> pacemakerModeOptions = new JComboBox<String>(allModes);
+		JButton pacemakerModeButton = new JButton("OK");
+		pacemakerModePanel.add(pacemakerModeLabel);
+		pacemakerModePanel.add(pacemakerModeOptions);
+		pacemakerModePanel.add(pacemakerModeButton);
 		
 		jlb4=new JLabel("Heart Details");
 		jlb5=new JLabel("Pacemaker Details");
@@ -157,6 +167,16 @@ public class ViewMain extends JFrame {
             }
         });  
 		
+		pacemakerModeButton.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {      
+            	obj2.setMode(pacemakerModeOptions.getSelectedItem().toString());
+            	deletePacemakerDetails();
+            	deleteRate();
+            }
+        }); 
+		
 		//add accessory
 		this.add(jssp2);
 		actionPanel.add(actionLabel);
@@ -173,6 +193,8 @@ public class ViewMain extends JFrame {
 		actionPanel.add(heartDiseasePanel);
 		//actionPanel.add(heartDiseaseLabel);
 		//actionPanel.add(heartDiseaseText);
+		
+		actionPanel.add(pacemakerModePanel);
 		
 		jp2.add(jlb8);
 		jp3.add(jlb6);
@@ -227,11 +249,14 @@ public class ViewMain extends JFrame {
 	public void refreshPacemaker() {
 		String status = obj2.getStatus();
 		int batteryLife = obj2.getBatteryLife();
+		String cMode = obj2.getMode();
 		JLabel pStatus = new JLabel("Pacemaker Status : "+status);
 		JLabel pBatteryLife = new JLabel("Battery Life : "+batteryLife+"%");
+		JLabel currentMode = new JLabel("Current Mode : "+cMode);
 		pacemakerPanel.add(jlb5);
 		pacemakerPanel.add(pStatus);
 		pacemakerPanel.add(pBatteryLife);
+		pacemakerPanel.add(currentMode);
 	}
 	
 	public void deleteRate() {
