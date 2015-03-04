@@ -18,6 +18,7 @@ public class Pacemaker implements PacemakerInterface {
         this.modes.add("AAI");
         this.modes.add("None");
     	this.status = "Not Active";
+        this.mode = "None";
     	this.batteryLife=100;
     }
 
