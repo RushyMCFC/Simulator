@@ -126,4 +126,16 @@ public interface HeartInterface {
      */
     public void setAV_state(boolean AV_state);
 
+    /**
+     *
+     * @return the heart's natural pacemaker status
+     */
+    public String getNaturalStatus();
+
+    /**
+     * Set the natural pacemaker's status
+     * @param naturalStatus
+     */
+    public void setNaturalStatus(String naturalStatus);
+
 }
