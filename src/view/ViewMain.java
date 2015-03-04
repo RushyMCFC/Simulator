@@ -19,20 +19,24 @@ public class ViewMain extends JFrame {
     JLabel actionLabel,heartbeatLabel,heartDiseaseLabel,jlb4,jlb5,jlb6,jlb7,jlb8;
     JTextField heartDiseaseText;
     JScrollPane jsp1;
-    JComboBox jcb1;
     JList jlist;
     JSplitPane jssp,jssp1,jssp2;
 	Outputs t=new Outputs();
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ViewMain a=new ViewMain();
-	}
-	//function
-	public ViewMain()
-	{
+	private static ViewMain a= new ViewMain();
+	private ViewMain(){};
+	
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub		
+		a.Start();
 		//Testing
 		MyThreadStart obj2 = new MyThreadStart();
-		
+	}
+	public static ViewMain getInstance()
+	{
+		return a;
+	}
+	//function
+	public void Start() throws InterruptedException {
 		// create accessory
 		actionPanel=new JPanel(new GridLayout(4,1));
 		jp2=new JPanel();
@@ -160,7 +164,9 @@ public class ViewMain extends JFrame {
 		this.setSize(1000, 1000);
 	
 		this.setVisible(true);
+		
 	}
+	
 	
 	private void refreshHeartRate()
 	{
@@ -176,6 +182,12 @@ public class ViewMain extends JFrame {
 		heartDetailsPanel.add(hStatus);
 		heartDetailsPanel.add(hDisease);
 		jp3.add(htime);
+	}
+	
+	public void deleteRate() {
+		heartDetailsPanel.removeAll();
+		refreshHeartRate();
+		validate();
 	}
 
 }
