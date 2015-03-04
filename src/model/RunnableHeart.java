@@ -59,6 +59,52 @@ public class RunnableHeart implements Runnable {
 
 
     }
+    private void abnormalHeartBeat() {
+
+
+        if (incrementCount == 6) {
+            this.ourHeart.decreaseHeartRate();
+            this.ourHeart.decreaseHeartRate();
+            this.ourHeart.decreaseHeartRate();
+            this.ourHeart.decreaseHeartRate();
+            this.ourHeart.decreaseHeartRate();
+            incrementCount = 0;
+        }
+        if (decrementCount == 6) {
+            this.ourHeart.increaseHeartRate();
+            this.ourHeart.increaseHeartRate();
+            this.ourHeart.increaseHeartRate();
+            this.ourHeart.increaseHeartRate();
+            this.ourHeart.increaseHeartRate();
+            decrementCount = 0;
+        }
+
+        Random dice = new Random();
+        int choice = dice.nextInt(10);
+        if (choice < 2) {
+            this.ourHeart.increaseHeartRate();
+            incrementCount++;
+
+        } else if(choice>=2 && choice <5){
+            for(int j=0; j<=2; j++)
+                this.ourHeart.increaseHeartRate();
+
+            incrementCount++;
+        }
+        else if(choice>=5 && choice<8)
+        {
+            for(int j=0; j<=2; j++)
+                this.ourHeart.decreaseHeartRate();
+            decrementCount++;
+        }
+        else
+        {
+            this.ourHeart.decreaseHeartRate();
+            decrementCount++;
+        }
+
+
+    }
 
     public void runHeart() {
 
@@ -66,7 +112,7 @@ public class RunnableHeart implements Runnable {
         {
             this.ourHeart.setHeartStatus("Arrhythmia");
             this.ourHeart.setNaturalStatus("Pacemaker failed to pulse");
-            this.regularHeartBeat();
+            this.abnormalHeartBeat();
         }
         else if (!this.ourHeart.isAV())
         {

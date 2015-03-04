@@ -128,21 +128,21 @@ public final class Heart implements HeartInterface {
         } else if (this.currentDisease.equals("Third Degree AV tBlock")) {
             Random heartBeatLow = new Random();
             this.heartbeat = heartBeatLow.nextInt(25) + 100;
+
         } else if (this.currentDisease.equals("Sinoatrical block")) {
             this.AV = false;
             Random delay = new Random();
             this.setAV_delay(delay.nextInt(1500)+500);
             this.setHeartBeat((60*60)/(60+this.getAV_delay()/100));
-        } else if (this.currentDisease.equals("Pacemaker fail"))
-        {
+        } else if (this.currentDisease.equals("Pacemaker fail")){
             this.SA = false;
             Random delay = new Random();
-            this.setAV_delay(delay.nextInt(1500)+500);
-            this.setSA_delay(delay.nextInt(1500)+500);
+            this.setAV_delay(delay.nextInt(2000)+500);
+            this.setSA_delay(delay.nextInt(2000)+500);
             this.setHeartBeat((60*60)/(60+this.getAV_delay()/100+this.getSA_delay()/100));
-        }
-         else if (this.currentDisease.equals("None"))
-        {
+        } else if (this.currentDisease.equals("None")){
+            this.SA = true;
+            this.AV = true;
             this.setAV_delay(500);
             this.setSA_delay(500);
             this.setHeartBeat(67);
