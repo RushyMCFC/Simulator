@@ -115,4 +115,6 @@ public interface HeartInterface {
      */
     public void setNaturalStatus(String naturalStatus);
 
+    public void setHeartRate(int rate);
+
 }

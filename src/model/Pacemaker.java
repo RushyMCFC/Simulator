@@ -12,12 +12,12 @@ public class Pacemaker implements PacemakerInterface {
 
     private Pacemaker()
     {
-        modes = new ArrayList<String>();
-        modes.add("DOO");
-        modes.add("VDD");
-        modes.add("AAI");
-    	status = "Not Active";
-    	batteryLife=100;
+        this.modes = new ArrayList<String>();
+        this.modes.add("DOO");
+        this.modes.add("VDD");
+        this.modes.add("AAI");
+    	this.status = "Not Active";
+    	this.batteryLife=100;
     }
 
     public int getBatteryLife() {
@@ -38,7 +38,7 @@ public class Pacemaker implements PacemakerInterface {
     }
     
     public void changeBatteryLife() {
-    	batteryLife --;
+    	if(this.batteryLife>0) this.batteryLife --;
     }
     
     public static Pacemaker getInstance()

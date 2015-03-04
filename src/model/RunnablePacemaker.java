@@ -4,28 +4,22 @@ import view.ViewMain;
 
 public class RunnablePacemaker implements Runnable {
 
-	private Pacemaker p = Pacemaker.getInstance();
+	private PacemakerInterface p = Pacemaker.getInstance();
+    private HeartInterface h = Heart.getHeartInstance();
 	boolean flag = true;
 	
 	@Override
 	public void run() {
-		while (flag) {
             ViewMain vm = ViewMain.getInstance();
             vm.deletePacemakerDetails();
-            try{
-                Thread.sleep(5000);
-                this.refreshPacemaker();
-            }
-            catch(InterruptedException ex)
-            {
-                ex.printStackTrace();
-            }
+
+        if(p.getMode().equals("DOO"))
+        {
+            h.setHeartRate(65);
+            h.setAV_delay(500);
+            h.setSA_delay(500);
         }
+
 	}
 
-	private void refreshPacemaker() {
-		if(p.getStatus().compareTo("Active")==0) {
-    		p.changeBatteryLife();
-    	}
-    }
 }

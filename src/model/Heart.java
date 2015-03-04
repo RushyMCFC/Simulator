@@ -205,7 +205,7 @@ public final class Heart implements HeartInterface {
 
     public void setNaturalStatus(String naturalStatus) { this.naturalStatus = naturalStatus;}
 
-    protected void setHeartBeat(int beat)
+    public void setHeartRate(int beat)
     {
         this.heartbeat = beat;
     }
