@@ -50,8 +50,8 @@ public class ViewMain extends JFrame {
 		pacemakerPanel=new JPanel(new GridLayout(5,1));
 		
 		actionLabel=new JLabel("Actions");
-		detachPacemakerButton =new JButton ("Detach pacemaker");
-		emptyBatteryButton =new JButton ("Empty battery");
+		detachPacemakerButton =new JButton ("Attach / Detach pacemaker");
+		emptyBatteryButton =new JButton ("Battery Failure");
 		JPanel dp_eb = new JPanel();
 		dp_eb.add(detachPacemakerButton);
 		dp_eb.add(emptyBatteryButton);
