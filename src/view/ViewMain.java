@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.*;
 
@@ -41,6 +42,7 @@ public class ViewMain extends JFrame {
 		actionPanel=new JPanel(new GridLayout(4,1));
 		jp2=new JPanel();
 		jp3=new JPanel();
+        jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
 		heartDetailsPanel=new JPanel(new GridLayout(4,1));
 		jp5=new JPanel();
 		
@@ -176,8 +178,8 @@ public class ViewMain extends JFrame {
 		JLabel hBeat = new JLabel("Heart beat rate : "+totalBeats+"/min");
 		JLabel hStatus = new JLabel("Heart Status : "+status);
 		JLabel hDisease = new JLabel("Heart Disease : "+disease);
-		JLabel htime = new JLabel("time : "+t.getYear()+" "+t.getMonth()+" "+t.getDate()); 
-		heartDetailsPanel.add(jlb4);
+        JLabel htime = new JLabel(new Date().toString());
+        heartDetailsPanel.add(jlb4);
 		heartDetailsPanel.add(hBeat);
 		heartDetailsPanel.add(hStatus);
 		heartDetailsPanel.add(hDisease);
