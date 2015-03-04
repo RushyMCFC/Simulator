@@ -21,11 +21,11 @@ public class MyThreadStart {
 //		});
 //		t.start();
 
-        t = new Thread(new RunnableHeart());
-        t.start();
-        while(t.isAlive())
-        {
-            
-        }
+//        t = new Thread(new RunnableHeart());
+//        t.start();
+//        while(t.isAlive())
+//        {
+//            
+//        }
 	}
 }
