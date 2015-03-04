@@ -90,30 +90,36 @@ public class ViewMain extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 //Execute when button is pressed
-                obj.increaseHeartRate();
-                heartDetailsPanel.removeAll();
+            	 JLabel htime = new JLabel(new Date().toString());
+            	 jp3.add(htime);
+            	 obj.increaseHeartRate();
+                 heartDetailsPanel.removeAll();
+            
+              
                 jlb9=new JLabel("Current heart rate +1");
+                jp3.add(jlb9);  
                 refreshHeartRate();
                 validate();
-                JLabel htime = new JLabel(new Date().toString());
-                jp3.add(htime);  
-                jp3.add(jlb9);
+           
             }
         });  
 		
 		downButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
-            {
+            {        JLabel htime = new JLabel(new Date().toString());
+            	jp3.add(htime);
                 //Execute when button is pressed
                 obj.decreaseHeartRate();
                 heartDetailsPanel.removeAll();
+               
+               
+          
                 jlb10=new JLabel("Current heart rate -1");
+                
+                jp3.add(jlb10);
                 refreshHeartRate();
                 validate();
-                JLabel htime = new JLabel(new Date().toString());
-                jp3.add(htime);
-                jp3.add(jlb10);
             }
         });  
 		
@@ -124,13 +130,16 @@ public class ViewMain extends JFrame {
                 //Execute when button is pressed
             	String diseaseName = heartDiseaseOptions.getSelectedItem().toString();
                 obj.setHeartDisease(diseaseName);
+             
+                heartDetailsPanel.removeAll();
+             
+                JLabel htime = new JLabel(new Date().toString());
                 jlb7=new JLabel("Current disease is"+ diseaseName);
+                jp3.add(htime);
+                jp3.add(jlb7);
                 heartDetailsPanel.removeAll();
                 refreshHeartRate();
                 validate();
-                JLabel htime = new JLabel(new Date().toString());
-                jp3.add(htime);
-                jp3.add(jlb7);
             }
         });
 		
