@@ -91,7 +91,7 @@ public class ViewMain extends JFrame {
 		upButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
-            {
+            {edge();
                 //Execute when button is pressed
             	 JLabel htime = new JLabel(new Date().toString());
             	 jp3.add(htime);
@@ -110,7 +110,9 @@ public class ViewMain extends JFrame {
 		downButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
-            {        JLabel htime = new JLabel(new Date().toString());
+            {      
+            	edge();
+            	JLabel htime = new JLabel(new Date().toString());
             	jp3.add(htime);
                 //Execute when button is pressed
                 obj.decreaseHeartRate();
@@ -129,7 +131,7 @@ public class ViewMain extends JFrame {
 		heartDiseaseButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
-            {
+            {edge();
                 //Execute when button is pressed
             	String diseaseName = heartDiseaseOptions.getSelectedItem().toString();
                 obj.setHeartDisease(diseaseName);
@@ -149,7 +151,7 @@ public class ViewMain extends JFrame {
 		detachPacemakerButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
-            {       
+            {      edge(); 
             	obj2.changeStatus();
             	deletePacemakerDetails();
             }
@@ -242,6 +244,14 @@ public class ViewMain extends JFrame {
 		pacemakerPanel.removeAll();
 		refreshPacemaker();
 		validate();
+	}
+	private void edge()
+	{
+		if(jp3.getComponentCount()>=20)
+   	 {
+   		 jp3.remove(1);
+   		 jp3.remove(1);
+   	 }
 	}
 
 }
