@@ -17,7 +17,7 @@ public class ViewMain extends JFrame {
 	//define
 	JPanel actionPanel,jp2, jp3,heartDetailsPanel,jp5,jp6,jp7,jp8;
     JButton detachPacemakerButton,emptyBatteryButton,upButton,downButton,jb5;
-    JLabel actionLabel,heartbeatLabel,heartDiseaseLabel,jlb4,jlb5,jlb6,jlb7,jlb8;
+    JLabel actionLabel,heartbeatLabel,heartDiseaseLabel,jlb4,jlb5,jlb6,jlb7,jlb8,jlb9,jlb10;
     JTextField heartDiseaseText;
     JScrollPane jsp1;
     JList jlist;
@@ -31,6 +31,7 @@ public class ViewMain extends JFrame {
 		a.Start();
 		//Testing
 		MyThreadStart obj2 = new MyThreadStart();
+		 JLabel htime = new JLabel(new Date().toString());
 	}
 	public static ViewMain getInstance()
 	{
@@ -74,7 +75,7 @@ public class ViewMain extends JFrame {
 		jlb4=new JLabel("Heart Details");
 		jlb5=new JLabel("Pacemaker Details");
 		jlb6=new JLabel("Output");
-		jlb7=new JLabel("Disease not found");
+	//	jlb7=new JLabel(diseaseName);
 		jlb8=new JLabel("Image");
 		jssp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,heartDetailsPanel,actionPanel);
 		jssp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,jssp,jp5);
@@ -91,8 +92,12 @@ public class ViewMain extends JFrame {
                 //Execute when button is pressed
                 obj.increaseHeartRate();
                 heartDetailsPanel.removeAll();
+                jlb9=new JLabel("Current heart rate +1");
                 refreshHeartRate();
                 validate();
+                JLabel htime = new JLabel(new Date().toString());
+                jp3.add(htime);  
+                jp3.add(jlb9);
             }
         });  
 		
@@ -103,8 +108,12 @@ public class ViewMain extends JFrame {
                 //Execute when button is pressed
                 obj.decreaseHeartRate();
                 heartDetailsPanel.removeAll();
+                jlb10=new JLabel("Current heart rate -1");
                 refreshHeartRate();
                 validate();
+                JLabel htime = new JLabel(new Date().toString());
+                jp3.add(htime);
+                jp3.add(jlb10);
             }
         });  
 		
@@ -115,9 +124,13 @@ public class ViewMain extends JFrame {
                 //Execute when button is pressed
             	String diseaseName = heartDiseaseOptions.getSelectedItem().toString();
                 obj.setHeartDisease(diseaseName);
+                jlb7=new JLabel("Current disease is"+ diseaseName);
                 heartDetailsPanel.removeAll();
                 refreshHeartRate();
                 validate();
+                JLabel htime = new JLabel(new Date().toString());
+                jp3.add(htime);
+                jp3.add(jlb7);
             }
         });
 		
@@ -140,7 +153,7 @@ public class ViewMain extends JFrame {
 		
 		jp2.add(jlb8);
 		jp3.add(jlb6);
-		jp3.add(jlb7);
+		//jp3.add(jlb7);
 		//jp4.add(jlb4);
 		jp5.add(jlb5);
 		//this.add (jp1,BorderLayout.NORTH);
@@ -178,12 +191,12 @@ public class ViewMain extends JFrame {
 		JLabel hBeat = new JLabel("Heart beat rate : "+totalBeats+"/min");
 		JLabel hStatus = new JLabel("Heart Status : "+status);
 		JLabel hDisease = new JLabel("Heart Disease : "+disease);
-        JLabel htime = new JLabel(new Date().toString());
+       // JLabel htime = new JLabel(new Date().toString());
         heartDetailsPanel.add(jlb4);
 		heartDetailsPanel.add(hBeat);
 		heartDetailsPanel.add(hStatus);
 		heartDetailsPanel.add(hDisease);
-		jp3.add(htime);
+		//jp3.add(htime);
 	}
 	
 	public void deleteRate() {
