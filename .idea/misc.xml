@@ -114,8 +114,5 @@
       <Port>5050</Port>
     </configuration>
   </component>
-  <component name="SvnConfiguration" myUseAcceleration="nothing">
-    <configuration>C:\Users\kostas\AppData\Roaming\Subversion</configuration>
-  </component>
 </project>
 

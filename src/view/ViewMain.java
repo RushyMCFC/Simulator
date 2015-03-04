@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import model.Heart;
+import model.Outputs;
 
 
 public class ViewMain extends JFrame {
@@ -20,6 +21,7 @@ public class ViewMain extends JFrame {
     JComboBox jcb1;
     JList jlist;
     JSplitPane jssp,jssp1,jssp2;
+	Outputs t=new Outputs();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ViewMain a=new ViewMain();
@@ -147,7 +149,7 @@ public class ViewMain extends JFrame {
 	//	this.add(jp4,BorderLayout.WEST);
 	 //   this.add(jp5,BorderLayout.EAST);
 		 //DEFINE PROPERTIES
-		this.setTitle("Pacemaker simulater");
+		this.setTitle("Pacemaker simulator");
 		this.setLocation(200,200);
 	
 		//size
@@ -164,10 +166,12 @@ public class ViewMain extends JFrame {
 		JLabel hBeat = new JLabel("Heart beat rate : "+totalBeats+"/min");
 		JLabel hStatus = new JLabel("Heart Status : "+status);
 		JLabel hDisease = new JLabel("Heart Disease : "+disease);
+		JLabel htime = new JLabel("time : "+t.getYear()+" "+t.getMonth()+" "+t.getDate()); 
 		heartDetailsPanel.add(jlb4);
 		heartDetailsPanel.add(hBeat);
 		heartDetailsPanel.add(hStatus);
 		heartDetailsPanel.add(hDisease);
+		jp3.add(htime);
 	}
 
 }
