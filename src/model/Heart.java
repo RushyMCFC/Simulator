@@ -7,6 +7,7 @@ import java.util.Random;
 public final class Heart implements HeartInterface {
     private int heartbeat;
     private String heartStatus;
+    private String naturalStatus;
     //Sinoatrical
     private boolean SA;
     //Atrioventricular
@@ -33,11 +34,13 @@ public final class Heart implements HeartInterface {
     }
 
     private Heart() {
-        this.SA_delay = 330;
-        this.AV_delay = 330;
+        this.SA_delay = 500;
+        this.AV_delay = 500;
         this.SA_state = false;
         this.AV_state = false;
         this.currentDisease = "None";
+
+        this.naturalStatus = "Normal";
         this.SA = true;
         this.AV = true;
         this.heartbeat = 67;
@@ -150,20 +153,6 @@ public final class Heart implements HeartInterface {
 
     }
 
-
-
-
-//
-//
-//        if(this.SA && this.AV)
-//        {
-//            try {this.wait(this.SA_delay);
-//            }
-//            catch(InterruptedException ex)
-//            {
-//                Thread.currentThread().interrupt();
-//            }
-//        }
     public boolean isSA() {
         return SA;
     }
@@ -208,7 +197,9 @@ public final class Heart implements HeartInterface {
         return AV_state;
     }
 
-    public void setAV_state(boolean AV_state) {
-        this.AV_state = AV_state;
+    public void setAV_state(boolean AV_state) { this.AV_state = AV_state;
     }
+    public String getNaturalStatus() { return naturalStatus;}
+
+    public void setNaturalStatus(String naturalStatus) { this.naturalStatus = naturalStatus;}
 }
