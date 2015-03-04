@@ -9,13 +9,14 @@ public class RunnableHeart implements Runnable {
 
     private Heart ourHeart = Heart.getHeartInstance();
     boolean flag = true;
+    private ViewMain vm = ViewMain.getInstance();
 
     @Override
     public void run() {
 
         while (flag) {
             this.runHeart();
-            ViewMain vm = ViewMain.getInstance();
+
             vm.deleteRate();
             try{
                 Thread.sleep(1500);

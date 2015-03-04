@@ -12,14 +12,21 @@ public class RunnablePacemaker implements Runnable {
 	public void run() {
             ViewMain vm = ViewMain.getInstance();
             vm.deletePacemakerDetails();
+            this.runMode();
 
+
+
+	}
+
+    private void runMode()
+    {
         if(p.getMode().equals("DOO"))
         {
             h.setHeartRate(65);
             h.setAV_delay(500);
             h.setSA_delay(500);
+//            System.out.println("Hello");
         }
-
-	}
+    }
 
 }
