@@ -146,6 +146,15 @@ public class ViewMain extends JFrame {
             }
         });
 		
+		detachPacemakerButton.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {       
+            	obj2.changeStatus();
+            	deletePacemakerDetails();
+            }
+        });  
+		
 		//add accessory
 		this.add(jssp2);
 		actionPanel.add(actionLabel);
@@ -226,6 +235,12 @@ public class ViewMain extends JFrame {
 	public void deleteRate() {
 		heartDetailsPanel.removeAll();
 		refreshHeartRate();
+		validate();
+	}
+	
+	public void deletePacemakerDetails() {
+		pacemakerPanel.removeAll();
+		refreshPacemaker();
 		validate();
 	}
 

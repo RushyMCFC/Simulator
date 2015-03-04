@@ -2,7 +2,7 @@ package model;
 
 
 public class MyThreadStart {
-	private Thread t;
+	private Thread t1, t2;
 	public MyThreadStart() throws InterruptedException {
 //		t = new Thread(new Runnable() {
 //		     public void run() {
@@ -21,7 +21,10 @@ public class MyThreadStart {
 //		});
 //		t.start();
 
-        t = new Thread(new RunnableHeart());
-        t.start();
+        t1 = new Thread(new RunnableHeart());
+        t1.start();
+        
+        t2 = new Thread(new RunnablePacemaker());
+        t2.start();
 	}
 }

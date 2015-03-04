@@ -8,7 +8,7 @@ public class Pacemaker {
 
     private Pacemaker()
     {	
-    	status = "Active";
+    	status = "Not Active";
     	batteryLife=100;
     }
 
@@ -18,6 +18,19 @@ public class Pacemaker {
     
     public String getStatus() {
     	return status;
+    }
+    
+    public void changeStatus() {
+    	if(status.compareTo("Active")==0) {
+    		status = "Not Active";
+    	}
+    	else {
+    		status = "Active";
+    	}
+    }
+    
+    public void changeBatteryLife() {
+    	batteryLife --;
     }
     
     public static Pacemaker getInstance()
