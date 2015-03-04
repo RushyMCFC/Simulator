@@ -102,29 +102,6 @@ public interface HeartInterface {
      */
     public void setAV_delay(int AV_delay);
 
-    /**
-     *
-     * @return true if the blood is contracted from the atrium
-     */
-    public boolean isSA_state();
-
-    /**
-     * Sets the blood in the ventricle
-     * @param SA_state
-     */
-    public void setSA_state(boolean SA_state);
-
-    /**
-     *
-     * @return true if the blood is contracted from the ventricle
-     */
-    public boolean isAV_state();
-
-    /**
-     * Sets the blood out of the heart
-     * @param AV_state
-     */
-    public void setAV_state(boolean AV_state);
 
     /**
      *

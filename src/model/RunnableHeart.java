@@ -18,7 +18,7 @@ public class RunnableHeart implements Runnable {
             ViewMain vm = ViewMain.getInstance();
             vm.deleteRate();
             try{
-                Thread.sleep(1000);
+                Thread.sleep(1500);
             }
             catch(InterruptedException ex)
             {
@@ -63,6 +63,7 @@ public class RunnableHeart implements Runnable {
 
 
         if (incrementCount == 6) {
+            this.ourHeart.decreaseHeartRate();
             this.ourHeart.decreaseHeartRate();
             this.ourHeart.decreaseHeartRate();
             this.ourHeart.decreaseHeartRate();

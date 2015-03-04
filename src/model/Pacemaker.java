@@ -1,9 +1,26 @@
 package model;
 
-public class Pacemaker {
+public class Pacemaker implements PacemakerInterface {
 
     private static Pacemaker INSTANCE = new Pacemaker();
     private int batteryLife;
+    private String mode;
+
+    @Override
+    public String getMode() {
+        return this.mode;
+    }
+
+    @Override
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    @Override
+    public void setBatterLife(int life) {
+        this.batteryLife = life;
+    }
+
     private String status;
 
     private Pacemaker()
@@ -20,12 +37,12 @@ public class Pacemaker {
     	return status;
     }
     
-    public void changeStatus() {
-    	if(status.compareTo("Active")==0) {
-    		status = "Not Active";
+    public void setStatus(String status) {
+    	if(status.equals("Active")) {
+    		this.status = "Not Active";
     	}
     	else {
-    		status = "Active";
+    		this.status = "Active";
     	}
     }
     
