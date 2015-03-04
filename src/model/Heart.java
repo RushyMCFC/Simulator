@@ -129,19 +129,19 @@ public final class Heart implements HeartInterface {
             this.AV = false;
             Random delay = new Random();
             this.setAV_delay(delay.nextInt(1500)+500);
-            this.setHeartBeat((57*60)/(60+this.getAV_delay()/100));
+            this.setHeartRate((57*60)/(60+this.getAV_delay()/100));
         } else if (this.currentDisease.equals("Heart failure")){
             this.SA = false;
             Random delay = new Random();
             this.setAV_delay(delay.nextInt(2000)+500);
-            this.setSA_delay(delay.nextInt(2000)+500);
-            this.setHeartBeat((48*60)/(60+this.getAV_delay()/100+this.getSA_delay()/100));
+            this.setSA_delay(delay.nextInt(2000) + 500);
+            this.setHeartRate((48*60)/(60+this.getAV_delay()/100+this.getSA_delay()/100));
         } else if (this.currentDisease.equals("None")){
             this.SA = true;
             this.AV = true;
             this.setAV_delay(500);
             this.setSA_delay(500);
-            this.setHeartBeat(67);
+            this.setHeartRate(67);
         }
           else {
             throw new IllegalArgumentException("Disease not recognised");
