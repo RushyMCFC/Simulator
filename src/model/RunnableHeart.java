@@ -7,7 +7,7 @@ import view.ViewMain;
  */
 public class RunnableHeart implements Runnable {
 
-    private HeartInterface ourHeart = Heart.getHeartInstance();
+    private Heart ourHeart = Heart.getHeartInstance();
     boolean flag = true;
 
     @Override
@@ -17,13 +17,13 @@ public class RunnableHeart implements Runnable {
             this.runHeart();
             ViewMain vm = ViewMain.getInstance();
             vm.deleteRate();
-//            try{
-//                Thread.sleep(1000);
-//            }
-//            catch(InterruptedException ex)
-//            {
-//                ex.printStackTrace();
-//            }
+            try{
+                Thread.sleep(1000);
+            }
+            catch(InterruptedException ex)
+            {
+                ex.printStackTrace();
+            }
         }
 
     }
@@ -64,52 +64,21 @@ public class RunnableHeart implements Runnable {
 
         if(!this.ourHeart.isSA())
         {
-            Random delay = new Random();
-            this.ourHeart.setAV_delay(delay.nextInt(300)+500);
-            this.ourHeart.setSA_delay(delay.nextInt(300)+500);
             this.ourHeart.setHeartStatus("Arrhythmia");
             this.ourHeart.setNaturalStatus("Pacemaker failed to pulse");
-
-            this.ourHeart.setSA_state(true);
-            try {Thread.sleep(ourHeart.getSA_delay());}
-            catch(InterruptedException ex){ ex.printStackTrace();}
-            this.ourHeart.setSA_state(false);
-            this.ourHeart.setAV_state(true);
-            try {Thread.sleep(ourHeart.getAV_delay());}
-            catch(InterruptedException ex){ ex.printStackTrace();}
-            this.ourHeart.setSA_state(false);
             this.regularHeartBeat();
         }
         else if (!this.ourHeart.isAV())
         {
-            Random delay = new Random();
-            this.ourHeart.setAV_delay(delay.nextInt(300)+500);
             this.ourHeart.setHeartStatus("Arrhythmia");
             this.ourHeart.setNaturalStatus("Sinoatrical Block");
-
-            this.ourHeart.setSA_state(true);
-            try {Thread.sleep(ourHeart.getSA_delay());}
-            catch(InterruptedException ex){ ex.printStackTrace();}
-            this.ourHeart.setSA_state(false);
-            this.ourHeart.setAV_state(true);
-            try {Thread.sleep(ourHeart.getAV_delay());}
-            catch(InterruptedException ex){ ex.printStackTrace();}
-            this.ourHeart.setSA_state(false);
             this.regularHeartBeat();
 
         }
         else
         {
-            this.ourHeart.setAV_delay(500);
-            this.ourHeart.setSA_delay(500);
-            this.ourHeart.setSA_state(true);
-            try {Thread.sleep(ourHeart.getSA_delay());}
-            catch(InterruptedException ex){ ex.printStackTrace();}
-            this.ourHeart.setSA_state(false);
-            this.ourHeart.setAV_state(true);
-            try {Thread.sleep(ourHeart.getAV_delay());}
-            catch(InterruptedException ex){ ex.printStackTrace();}
-            this.ourHeart.setSA_state(false);
+            this.ourHeart.setHeartStatus("Normal");
+            this.ourHeart.setNaturalStatus("Normal");
             this.regularHeartBeat();
         }
     }

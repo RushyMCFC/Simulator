@@ -2,8 +2,8 @@ package model;
 
 
 public class MyThreadStart {
-    private Thread t;
-    public MyThreadStart() throws InterruptedException {
+	private Thread t;
+	public MyThreadStart() throws InterruptedException {
 //		t = new Thread(new Runnable() {
 //		     public void run() {
 //		    	 while(flag) {
@@ -23,5 +23,5 @@ public class MyThreadStart {
 
         t = new Thread(new RunnableHeart());
         t.start();
-    }
+	}
 }

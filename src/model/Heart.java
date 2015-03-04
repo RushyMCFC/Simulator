@@ -36,8 +36,6 @@ public final class Heart implements HeartInterface {
     private Heart() {
         this.SA_delay = 500;
         this.AV_delay = 500;
-        this.SA_state = false;
-        this.AV_state = false;
         this.currentDisease = "None";
 
         this.naturalStatus = "Normal";
@@ -49,6 +47,8 @@ public final class Heart implements HeartInterface {
         diseases.add("Sinus Bradycardia");
         diseases.add("Sinoatrical block");
         diseases.add("Third Degree AV tBlock");
+        diseases.add("Pacemaker fail");
+        diseases.add("None");
     }
 
     public static Heart getHeartInstance() {
@@ -111,7 +111,10 @@ public final class Heart implements HeartInterface {
 
     @Override
     public void reset() {
+        this.SA_delay = 500;
+        this.AV_delay = 500;
         this.currentDisease = "None";
+        this.naturalStatus = "Normal";
         this.SA = true;
         this.AV = true;
         this.heartbeat = 67;
@@ -127,7 +130,24 @@ public final class Heart implements HeartInterface {
             this.heartbeat = heartBeatLow.nextInt(25) + 100;
         } else if (this.currentDisease.equals("Sinoatrical block")) {
             this.AV = false;
-        } else {
+            Random delay = new Random();
+            this.setAV_delay(delay.nextInt(1500)+500);
+            this.setHeartBeat((60*60)/(60+this.getAV_delay()/100));
+        } else if (this.currentDisease.equals("Pacemaker fail"))
+        {
+            this.SA = false;
+            Random delay = new Random();
+            this.setAV_delay(delay.nextInt(1500)+500);
+            this.setSA_delay(delay.nextInt(1500)+500);
+            this.setHeartBeat((60*60)/(60+this.getAV_delay()/100+this.getSA_delay()/100));
+        }
+         else if (this.currentDisease.equals("None"))
+        {
+            this.setAV_delay(500);
+            this.setSA_delay(500);
+            this.setHeartBeat(67);
+        }
+          else {
             throw new IllegalArgumentException("Disease not recognised");
         }
         this.updateStatus();
@@ -202,4 +222,9 @@ public final class Heart implements HeartInterface {
     public String getNaturalStatus() { return naturalStatus;}
 
     public void setNaturalStatus(String naturalStatus) { this.naturalStatus = naturalStatus;}
+
+    protected void setHeartBeat(int beat)
+    {
+        this.heartbeat = beat;
+    }
 }
