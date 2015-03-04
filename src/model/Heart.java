@@ -153,20 +153,6 @@ public final class Heart implements HeartInterface {
 
     }
 
-
-
-
-//
-//
-//        if(this.SA && this.AV)
-//        {
-//            try {this.wait(this.SA_delay);
-//            }
-//            catch(InterruptedException ex)
-//            {
-//                Thread.currentThread().interrupt();
-//            }
-//        }
     public boolean isSA() {
         return SA;
     }
