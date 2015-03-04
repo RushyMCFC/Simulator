@@ -54,4 +54,9 @@ public interface HeartInterface {
      */
     public ArrayList<String> getDiseases();
 
+    /**
+     * Constant heart beating
+     */
+    public void runHeart();
+
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import model.Heart;
+import model.MyThreadStart;
 import model.Outputs;
 
 
@@ -29,6 +30,9 @@ public class ViewMain extends JFrame {
 	//function
 	public ViewMain()
 	{
+		//Testing
+		MyThreadStart obj2 = new MyThreadStart();
+		
 		// create accessory
 		actionPanel=new JPanel(new GridLayout(4,1));
 		jp2=new JPanel();

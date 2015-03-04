@@ -19,6 +19,7 @@ public final class Heart implements HeartInterface {
 
     private static Heart INSTANCE = new Heart();
 
+
     @Override
     public void setHeartStatus(String status) {
             if (status == null)
@@ -38,7 +39,7 @@ public final class Heart implements HeartInterface {
         this.heartStatus= "Normal";
         this.diseases = new ArrayList<String>();
         diseases.add("arrhythmia");
-        diseases.add("bradyarrhythmia");
+        diseases.add("sinoatrical block");
         diseases.add("bradyarrhythmia");
         diseases.add("tachyarrhythmia");
     }
@@ -157,5 +158,34 @@ public final class Heart implements HeartInterface {
            this.setHeartStatus("Normal");
        }
 
+    }
+
+    static int incrementCount =0;
+    static int decrementCount =0;
+
+    public void runHeart()
+    {
+        if(incrementCount==3) {
+            this.decreaseHeartRate();
+            this.decreaseHeartRate();
+            this.decreaseHeartRate();
+            incrementCount=0;
+        }
+        if(decrementCount==3) {
+            this.increaseHeartRate();
+            this.increaseHeartRate();
+            this.increaseHeartRate();
+            decrementCount=0;
+        }
+        Random dice = new Random();
+        int choice = dice.nextInt(1);
+        if(choice==1) {
+            this.increaseHeartRate();
+            incrementCount++;
+        }
+        else {
+            this.decreaseHeartRate();
+            decrementCount++;
+        }
     }
 }
