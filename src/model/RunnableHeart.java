@@ -33,6 +33,13 @@ public class RunnableHeart implements Runnable {
             this.regularHeartBeat();
             ViewMain vm = ViewMain.getInstance();
             vm.deleteRate();
+            try{
+                Thread.sleep(1000);
+            }
+            catch(InterruptedException ex)
+            {
+
+            }
         }
 
     }

@@ -23,9 +23,5 @@ public class MyThreadStart {
 
         t = new Thread(new RunnableHeart());
         t.start();
-        while(t.isAlive())
-        {
-            
-        }
 	}
 }
