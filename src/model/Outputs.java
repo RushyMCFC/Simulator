@@ -8,23 +8,23 @@ public class Outputs {
 	Calendar c = Calendar.getInstance();
 	
 	
-	int year = c.get(Calendar.YEAR); 
-	int month = c.get(Calendar.MONTH); 
-	int date = c.get(Calendar.DATE); 
+	int year = c.get(Calendar.HOUR); 
+	int month = c.get(Calendar.MINUTE); 
+	int date = c.get(Calendar.SECOND); 
 
 	
 	 public Outputs()
 	 {
 		 c.setTime(this.adate);
 	 }
-	 public int getYear() {
-	        return c.get(Calendar.YEAR);  
+	 public int getHour() {
+	        return c.get(Calendar.HOUR);  
 	    }
-	 public int getMonth() {
-	        return c.get(Calendar.MONTH);  
+	 public int getMinute() {
+	        return c.get(Calendar.MINUTE);  
 	    }
-	 public int getDate() {
-	        return c.get(Calendar.DATE);  
+	 public int getSecond() {
+	        return c.get(Calendar.SECOND);  
 	    }
 
 }
