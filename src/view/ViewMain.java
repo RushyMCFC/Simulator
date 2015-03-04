@@ -10,12 +10,14 @@ import javax.swing.*;
 import model.Heart;
 import model.MyThreadStart;
 import model.Outputs;
+import model.Pacemaker;
 
 
 public class ViewMain extends JFrame {
 	Heart obj = Heart.getHeartInstance();
+	Pacemaker obj2 = Pacemaker.getInstance();
 	//define
-	JPanel actionPanel,jp2, jp3,heartDetailsPanel,jp5,jp6,jp7,jp8;
+	JPanel actionPanel,jp2, jp3,heartDetailsPanel,pacemakerPanel,jp6,jp7,jp8;
     JButton detachPacemakerButton,emptyBatteryButton,upButton,downButton,jb5;
     JLabel actionLabel,heartbeatLabel,heartDiseaseLabel,jlb4,jlb5,jlb6,jlb7,jlb8,jlb9,jlb10;
     JTextField heartDiseaseText;
@@ -45,7 +47,7 @@ public class ViewMain extends JFrame {
 		jp3=new JPanel();
         jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
 		heartDetailsPanel=new JPanel(new GridLayout(5,1));
-		jp5=new JPanel();
+		pacemakerPanel=new JPanel(new GridLayout(5,1));
 		
 		actionLabel=new JLabel("Actions");
 		detachPacemakerButton =new JButton ("Detach pacemaker");
@@ -78,11 +80,12 @@ public class ViewMain extends JFrame {
 	//	jlb7=new JLabel(diseaseName);
 		jlb8=new JLabel("Image");
 		jssp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,heartDetailsPanel,actionPanel);
-		jssp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,jssp,jp5);
+		jssp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,jssp,pacemakerPanel);
 		jssp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,jssp1,jp3);
 		
 		//Adding Heart Details
 		refreshHeartRate();
+		refreshPacemaker();
 		
 		//Increasing and Decreasing Heart Rate
 		upButton.addActionListener(new ActionListener() {
@@ -90,30 +93,36 @@ public class ViewMain extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 //Execute when button is pressed
-                obj.increaseHeartRate();
-                heartDetailsPanel.removeAll();
+            	 JLabel htime = new JLabel(new Date().toString());
+            	 jp3.add(htime);
+            	 obj.increaseHeartRate();
+                 heartDetailsPanel.removeAll();
+            
+              
                 jlb9=new JLabel("Current heart rate +1");
+                jp3.add(jlb9);  
                 refreshHeartRate();
                 validate();
-                JLabel htime = new JLabel(new Date().toString());
-                jp3.add(htime);  
-                jp3.add(jlb9);
+           
             }
         });  
 		
 		downButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
-            {
+            {        JLabel htime = new JLabel(new Date().toString());
+            	jp3.add(htime);
                 //Execute when button is pressed
                 obj.decreaseHeartRate();
                 heartDetailsPanel.removeAll();
+               
+               
+          
                 jlb10=new JLabel("Current heart rate -1");
+                
+                jp3.add(jlb10);
                 refreshHeartRate();
                 validate();
-                JLabel htime = new JLabel(new Date().toString());
-                jp3.add(htime);
-                jp3.add(jlb10);
             }
         });  
 		
@@ -124,13 +133,16 @@ public class ViewMain extends JFrame {
                 //Execute when button is pressed
             	String diseaseName = heartDiseaseOptions.getSelectedItem().toString();
                 obj.setHeartDisease(diseaseName);
+             
+                heartDetailsPanel.removeAll();
+             
+                JLabel htime = new JLabel(new Date().toString());
                 jlb7=new JLabel("Current disease is"+ diseaseName);
+                jp3.add(htime);
+                jp3.add(jlb7);
                 heartDetailsPanel.removeAll();
                 refreshHeartRate();
                 validate();
-                JLabel htime = new JLabel(new Date().toString());
-                jp3.add(htime);
-                jp3.add(jlb7);
             }
         });
 		
@@ -155,7 +167,6 @@ public class ViewMain extends JFrame {
 		jp3.add(jlb6);
 		//jp3.add(jlb7);
 		//jp4.add(jlb4);
-		jp5.add(jlb5);
 		//this.add (jp1,BorderLayout.NORTH);
 //	this.add (jp2,BorderLayout.CENTER);
 	//	this.add (jp3,BorderLayout.SOUTH);
@@ -200,6 +211,16 @@ public class ViewMain extends JFrame {
 		heartDetailsPanel.add(hDisease);
 		heartDetailsPanel.add(nStatus);
 		//jp3.add(htime);
+	}
+	
+	public void refreshPacemaker() {
+		String status = obj2.getStatus();
+		int batteryLife = obj2.getBatteryLife();
+		JLabel pStatus = new JLabel("Pacemaker Status : "+status);
+		JLabel pBatteryLife = new JLabel("Battery Life : "+batteryLife+"%");
+		pacemakerPanel.add(jlb5);
+		pacemakerPanel.add(pStatus);
+		pacemakerPanel.add(pBatteryLife);
 	}
 	
 	public void deleteRate() {
