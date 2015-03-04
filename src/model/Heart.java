@@ -11,6 +11,10 @@ public final class Heart implements HeartInterface {
     private boolean SA;
     //Atrioventricular
     private boolean AV;
+    private int SA_delay;
+    private int AV_delay;
+    private boolean SA_state;
+    private boolean AV_state;
     private String currentDisease;
     private ArrayList<String> diseases;
 
@@ -32,16 +36,19 @@ public final class Heart implements HeartInterface {
 
     private Heart()
     {
+        this.SA_delay = 330;
+        this.AV_delay = 330;
+        this.SA_state=false;
+        this.AV_state=false;
         this.currentDisease = "None";
         this.SA = true;
         this.AV = true;
         this.heartbeat= 67;
         this.heartStatus= "Normal";
         this.diseases = new ArrayList<String>();
-        diseases.add("arrhythmia");
-        diseases.add("sinoatrical block");
-        diseases.add("bradyarrhythmia");
-        diseases.add("tachyarrhythmia");
+        diseases.add("Sinus Bradycardia");
+        diseases.add("Sinoatrical block");
+        diseases.add("Third Degree AV tBlock");
     }
 
     public static Heart getHeartInstance()
@@ -110,17 +117,17 @@ public final class Heart implements HeartInterface {
 
     private void applyDiseaseEffects()
     {
-        if(this.currentDisease.equals("bradyarrhythmia"))
+        if(this.currentDisease.equals("Sinus Bradycardia"))
         {
             Random heartBeatLow = new Random();
             this.heartbeat= heartBeatLow.nextInt(50);
         }
-        else if(this.currentDisease.equals("tachyarrhythmia"))
+        else if(this.currentDisease.equals("Third Degree AV tBlock"))
         {
             Random heartBeatLow = new Random();
             this.heartbeat= heartBeatLow.nextInt(25) + 100;
         }
-        else if(this.currentDisease.equals("sinoatrical block"))
+        else if(this.currentDisease.equals("Sinoatrical block"))
         {
             this.AV = false;
         }
@@ -177,15 +184,26 @@ public final class Heart implements HeartInterface {
             this.increaseHeartRate();
             decrementCount=0;
         }
+
         Random dice = new Random();
-        int choice = dice.nextInt(1);
-        if(choice==1) {
+        int choice = dice.nextInt(3);
+        if(choice<2) {
             this.increaseHeartRate();
             incrementCount++;
         }
         else {
             this.decreaseHeartRate();
-            decrementCount++;
-        }
+            decrementCount++;     }
+//
+//
+//        if(this.SA && this.AV)
+//        {
+//            try {this.wait(this.SA_delay);
+//            }
+//            catch(InterruptedException ex)
+//            {
+//                Thread.currentThread().interrupt();
+//            }
+//        }
     }
 }
