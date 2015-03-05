@@ -243,10 +243,12 @@ public class ViewMain extends JFrame {
 		JLabel pStatus = new JLabel("Pacemaker Status : "+status);
 		JLabel pBatteryLife = new JLabel("Battery Life : "+batteryLife+"%");
 		JLabel currentMode = new JLabel("Current Mode : "+cMode);
+		JLabel modeDetails = new JLabel("Details : "+obj2.getModeDetails());
 		pacemakerPanel.add(jlb5);
 		pacemakerPanel.add(pStatus);
 		pacemakerPanel.add(pBatteryLife);
 		pacemakerPanel.add(currentMode);
+		pacemakerPanel.add(modeDetails);
 	}
 	
 	public void deleteRate() {

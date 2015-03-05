@@ -33,6 +33,7 @@ public class Pacemaker implements PacemakerInterface {
     public void setStatus() {
     	if(status.equals("Active")) {
     		this.status = "Not Active";
+    		this.mode = "None";
     	}
     	else {
     		this.status = "Active";
@@ -67,5 +68,20 @@ public class Pacemaker implements PacemakerInterface {
         ArrayList<String> copyOfModes = new ArrayList<String>(this.modes);
         return copyOfModes;
     }
+
+	public String getModeDetails() {
+		String details = "";
+		
+		if(this.mode.equals("None"))
+			details = "None";
+		else if(this.mode.equals("DOO"))
+			details = "Asynchronous Pacing & No Actual Contraction";
+		else if(this.mode.equals("VDD"))
+			details = "Paces the Ventricle, Sensing both Atrium and Ventricle & triggering a response";
+		else if(this.mode.equals("AAI"))
+			details = "Paces and Senses the Atrium, if sensing an atrial contraction it inhibits the atrial pace";
+		
+		return details;
+	}
 
 }
