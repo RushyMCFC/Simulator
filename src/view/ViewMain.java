@@ -24,6 +24,9 @@ public class ViewMain extends JFrame {
     JScrollPane jsp1;
     JList jlist;
     JSplitPane jssp,jssp1,jssp2;
+    
+    JPanel pacemakerModePanel,heartDiseasePanel,dp_eb,up_down;
+    
 	Outputs t=new Outputs();
 	private static ViewMain a= new ViewMain();
 	private ViewMain(){};
@@ -52,20 +55,20 @@ public class ViewMain extends JFrame {
 		actionLabel=new JLabel("Actions");
 		detachPacemakerButton =new JButton ("Attach / Detach pacemaker");
 		emptyBatteryButton =new JButton ("Battery Failure");
-		JPanel dp_eb = new JPanel();
+		dp_eb = new JPanel();
 		dp_eb.add(detachPacemakerButton);
 		dp_eb.add(emptyBatteryButton);
 		
 		heartbeatLabel=new JLabel("heart beat rate");
 		upButton =new JButton ("up");
 		downButton =new JButton ("down");
-		JPanel up_down = new JPanel();
+		up_down = new JPanel();
 		up_down.add(heartbeatLabel);
 		up_down.add(upButton);
 		up_down.add(downButton);
 		
 		heartDiseaseLabel=new JLabel("Select Heart Disease : ");
-		JPanel heartDiseasePanel = new JPanel();
+		heartDiseasePanel = new JPanel();
 		ArrayList<String> diseasesList = obj.getDiseases();
 		String allDiseases[] = diseasesList.toArray(new String[diseasesList.size()]);
 		final JComboBox<String> heartDiseaseOptions = new JComboBox<String>(allDiseases);
@@ -75,7 +78,7 @@ public class ViewMain extends JFrame {
 		heartDiseasePanel.add(heartDiseaseButton);
 		
 		JLabel pacemakerModeLabel = new JLabel("Select Pacemaker Mode : ");
-		JPanel pacemakerModePanel = new JPanel();
+		pacemakerModePanel = new JPanel();
 		ArrayList<String> am = obj2.getModes();
 		String allModes[] = am.toArray(new String[am.size()]);
 		final JComboBox<String> pacemakerModeOptions = new JComboBox<String>(allModes);
@@ -163,6 +166,7 @@ public class ViewMain extends JFrame {
             public void actionPerformed(ActionEvent e)
             {      edge(); 
             	obj2.setStatus();
+            	addPanels();
             	deletePacemakerDetails();
             }
         });  
@@ -179,22 +183,8 @@ public class ViewMain extends JFrame {
 		
 		//add accessory
 		this.add(jssp2);
-		actionPanel.add(actionLabel);
 		
-		actionPanel.add(dp_eb);
-		//actionPanel.add(jb1);
-		//actionPanel.add(jb2);
-		
-		actionPanel.add(up_down);
-		//actionPanel.add(heartbeatLabel);
-		//actionPanel.add(upButton);
-		///actionPanel.add(downButton);
-		
-		actionPanel.add(heartDiseasePanel);
-		//actionPanel.add(heartDiseaseLabel);
-		//actionPanel.add(heartDiseaseText);
-		
-		actionPanel.add(pacemakerModePanel);
+		addPanels();
 		
 		jp2.add(jlb8);
 		jp3.add(jlb6);
@@ -277,6 +267,28 @@ public class ViewMain extends JFrame {
    		 jp3.remove(1);
    		 jp3.remove(1);
    	 }
+	}
+	
+	private void addPanels() {
+		
+		actionPanel.removeAll();
+		
+		actionPanel.add(actionLabel);
+		
+		actionPanel.add(dp_eb);
+		
+		actionPanel.add(up_down);
+		
+		actionPanel.add(heartDiseasePanel);
+		
+		if(obj2.getStatus().toString().equals("Active"))
+			actionPanel.add(pacemakerModePanel);
+		else {
+			JPanel empty = new JPanel();
+			actionPanel.add(empty);
+		}
+		
+		actionPanel.validate();
 	}
 
 }
