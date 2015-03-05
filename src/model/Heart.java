@@ -121,20 +121,22 @@ public final class Heart implements HeartInterface {
     private void applyDiseaseEffects() {
         if (this.currentDisease.equals("Sinus Bradycardia")) {
             this.SA= true;
-            this.AV =false;
-            Random heartBeatLow = new Random();
-            this.heartbeat = heartBeatLow.nextInt(25)+25;
+            this.AV =true;
+            Random delay = new Random();
+            this.setSA_delay(delay.nextInt(1500)+500);
+            this.setHeartRate((54*60)/(60+this.getSA_delay()/100));
         } else if (this.currentDisease.equals("Sinoatrical block")) {
             this.SA = true;
             this.AV = false;
             Random delay = new Random();
-            this.setAV_delay(delay.nextInt(1500)+500);
+            this.setAV_delay(delay.nextInt(2500)+500);
             this.setHeartRate((57*60)/(60+this.getAV_delay()/100));
         } else if (this.currentDisease.equals("Heart failure")){
             this.SA = false;
+            this.AV = false;
             Random delay = new Random();
-            this.setAV_delay(delay.nextInt(2000)+500);
-            this.setSA_delay(delay.nextInt(2000) + 500);
+            this.setAV_delay(delay.nextInt(2200)+500);
+            this.setSA_delay(delay.nextInt(2200) + 500);
             this.setHeartRate((48*60)/(60+this.getAV_delay()/100+this.getSA_delay()/100));
         } else if (this.currentDisease.equals("None")){
             this.SA = true;
@@ -144,6 +146,33 @@ public final class Heart implements HeartInterface {
             this.setHeartRate(67);
         }
           else {
+            throw new IllegalArgumentException("Disease not recognised");
+        }
+        this.updateStatus();
+    }
+    void applyHeartDefects()
+    {
+        if (this.currentDisease.equals("Sinus Bradycardia")) {
+            this.SA= true;
+            this.AV =true;
+            Random delay = new Random();
+            this.setSA_delay(delay.nextInt(1500)+500);
+        } else if (this.currentDisease.equals("Sinoatrical block")) {
+            this.SA = true;
+            this.AV = false;
+            Random delay = new Random();
+            this.setAV_delay(delay.nextInt(2500)+500);
+        } else if (this.currentDisease.equals("Heart failure")){
+            this.SA = false;
+            this.AV = false;
+            Random delay = new Random();
+        } else if (this.currentDisease.equals("None")){
+            this.SA = true;
+            this.AV = true;
+            this.setAV_delay(500);
+            this.setSA_delay(500);
+        }
+        else {
             throw new IllegalArgumentException("Disease not recognised");
         }
         this.updateStatus();

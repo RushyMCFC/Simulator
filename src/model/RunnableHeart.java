@@ -61,28 +61,22 @@ public class RunnableHeart implements Runnable {
 
     }
     private void abnormalHeartBeat() {
+        Random dice = new Random();
+        int choice;
 
-
-        if (incrementCount == 6) {
-            this.ourHeart.decreaseHeartRate();
-            this.ourHeart.decreaseHeartRate();
-            this.ourHeart.decreaseHeartRate();
-            this.ourHeart.decreaseHeartRate();
-            this.ourHeart.decreaseHeartRate();
-            this.ourHeart.decreaseHeartRate();
+        if (incrementCount == 4) {
+           for(int i=0; i<dice.nextInt(7); i++)
+               this.ourHeart.decreaseHeartRate();
             incrementCount = 0;
         }
-        if (decrementCount == 6) {
-            this.ourHeart.increaseHeartRate();
-            this.ourHeart.increaseHeartRate();
-            this.ourHeart.increaseHeartRate();
-            this.ourHeart.increaseHeartRate();
-            this.ourHeart.increaseHeartRate();
+        if (decrementCount == 4) {
+            for(int i=0; i<dice.nextInt(7); i++)
+                this.ourHeart.increaseHeartRate();
             decrementCount = 0;
         }
 
-        Random dice = new Random();
-        int choice = dice.nextInt(10);
+
+        choice = dice.nextInt(10);
         if (choice < 2) {
             this.ourHeart.increaseHeartRate();
             incrementCount++;
