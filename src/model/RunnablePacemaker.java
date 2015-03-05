@@ -15,15 +15,12 @@ public class RunnablePacemaker implements Runnable {
         while(true){
             this.runMode();
         }
-
-
-
     }
 
     private void runMode()
     {
 
-        if(!h.isSA() && p.getMode().equals("VDD"))
+        if(p.getMode().equals("VDD"))
         {
             this.h.setSA(true);
             this.h.setAV(true);
@@ -31,42 +28,25 @@ public class RunnablePacemaker implements Runnable {
             this.setPace(68);
 
         }
-        else  if ((h.getHeartDisease().equals("Sinus Bradycardia")||h.getHeartDisease().equals("None"))&&p.getMode().equals("DOO"))
+        else  if (((h.getHeartDisease().equals("Sinus Bradycardia")||h.getHeartDisease().equals("None")))&&p.getMode().equals("DOO"))
         {
-            if(h.getHeartBeat()<60){
-                while(h.getHeartBeat()<68){
-                    h.increaseHeartRate();
-                    try {
-                        Thread.sleep(500);                 //1000 milliseconds is one second.
-                    } catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                    }
-                }
-
-                if(h.getHeartBeat()>68&&h.getHeartDisease().equals("Sinus Bradycardia")){
-                    while(h.getHeartBeat()>60)
-                    {
-                        h.decreaseHeartRate();
-                        try {
-                            Thread.sleep(500);                 //1000 milliseconds is one second.
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }
-                    }
-
-                }}
+            if(h.getHeartBeat()<55)
+                this.setPace(68);
+        }
+        else if (p.getMode().equals("AAI") && !h.isSA())
+        {
+            h.setSA_delay(500);
+            this.setPace(65);
         }
     }
 
     private void setPace(int frequency)
     {
-        while(this.h.getHeartBeat()>=frequency+5 || this.h.getHeartBeat()<=frequency-5)
-        {
             if(this.h.getHeartBeat()>=frequency+5 )
             {
                 h.decreaseHeartRate();
             }
-            else
+            else if (this.h.getHeartBeat()<=frequency-5)
             {
                 h.increaseHeartRate();
             }
@@ -75,7 +55,7 @@ public class RunnablePacemaker implements Runnable {
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-        }
+
     }
 
 
