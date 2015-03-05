@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Pacemaker implements PacemakerInterface {
 
     private static Pacemaker INSTANCE = new Pacemaker();
+    private Heart h = Heart.getHeartInstance();
     private int batteryLife;
     private String mode;
     private ArrayList<String> modes;
@@ -39,10 +40,7 @@ public class Pacemaker implements PacemakerInterface {
     		this.status = "Active";
     	}
     }
-    
-    public void changeBatteryLife() {
-    	if(this.batteryLife>0) this.batteryLife --;
-    }
+
     
     public static Pacemaker getInstance()
     {
@@ -56,6 +54,7 @@ public class Pacemaker implements PacemakerInterface {
     @Override
     public void setMode(String mode) {
         this.mode = mode;
+        this.h.applyHeartDefects();
     }
 
     @Override

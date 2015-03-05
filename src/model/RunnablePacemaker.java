@@ -30,7 +30,7 @@ public class RunnablePacemaker implements Runnable {
         }
         else  if (((h.getHeartDisease().equals("Sinus Bradycardia")||h.getHeartDisease().equals("None")))&&p.getMode().equals("DOO"))
         {
-            if(h.getHeartBeat()<55)
+
                 this.setPace(68);
         }
         else if (p.getMode().equals("AAI") && !h.isSA())
