@@ -112,20 +112,20 @@ public class RunnableHeart implements Runnable {
 
         if(!this.ourHeart.isSA())
         {
-            this.ourHeart.setHeartStatus("Arrhythmia");
+
             this.ourHeart.setNaturalStatus("Pacemaker failed to pulse");
             this.abnormalHeartBeat();
         }
         else if (!this.ourHeart.isAV())
         {
-            this.ourHeart.setHeartStatus("Arrhythmia");
+
             this.ourHeart.setNaturalStatus("Sinoatrical Block");
             this.regularHeartBeat();
 
         }
         else
         {
-            this.ourHeart.setHeartStatus("Normal");
+
             this.ourHeart.setNaturalStatus("Normal");
             this.regularHeartBeat();
         }
