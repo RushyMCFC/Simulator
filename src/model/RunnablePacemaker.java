@@ -7,18 +7,21 @@ public class RunnablePacemaker implements Runnable {
     private PacemakerInterface p = Pacemaker.getInstance();
     private HeartInterface h = Heart.getHeartInstance();
     boolean flag = true;
+    private int count=0;
 
     @Override
     public void run() {
         ViewMain vm = ViewMain.getInstance();
-        vm.deletePacemakerDetails();
         while(true){
+        	vm.deletePacemakerDetails();
             this.runMode();
         }
     }
 
     private void runMode()
     {
+    	
+    	
 
         if(p.getMode().equals("VDD"))
         {
@@ -38,6 +41,28 @@ public class RunnablePacemaker implements Runnable {
             h.setSA_delay(500);
             this.setPace(65);
         }
+        
+        if(p.getStatus().equals("Active")) {
+        	
+        }
+        try {
+			Thread.sleep(500);
+			if(p.getStatus().equals("Active")) {
+				this.count++;
+		        if(count == 10 && p.getFailFlag() == true)
+		        {
+		        	p.decreaseBatteryLife();
+		        	this.count=0;
+		        }
+		        else if(p.getFailFlag() == false) {
+		        	p.decreaseBatteryLife();
+		        	this.count=0;
+		        }
+			}   
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
     }
 
     private void setPace(int frequency)
@@ -49,11 +74,6 @@ public class RunnablePacemaker implements Runnable {
             else if (this.h.getHeartBeat()<=frequency-5)
             {
                 h.increaseHeartRate();
-            }
-            try {
-                Thread.sleep(500);                 //1000 milliseconds is one second.
-            } catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
             }
 
     }

@@ -10,7 +10,8 @@ public class Pacemaker implements PacemakerInterface {
     private String mode;
     private ArrayList<String> modes;
     private String status;
-
+    private boolean flagFail = true;
+private String status1;
     private Pacemaker()
     {
         this.modes = new ArrayList<String>();
@@ -21,12 +22,15 @@ public class Pacemaker implements PacemakerInterface {
     	this.status = "Not Active";
         this.mode = "None";
     	this.batteryLife=100;
+    	this.status1 = "Not Active";
     }
 
     public int getBatteryLife() {
     	return batteryLife;
     }
-    
+    public String getfailStatus(){
+    	return this.status1;
+    }
     public String getStatus() {
     	return status;
     }
@@ -82,5 +86,23 @@ public class Pacemaker implements PacemakerInterface {
 		
 		return details;
 	}
+	public void decreaseBatteryLife()
+	{
+		if(this.batteryLife>0)
+			this.batteryLife--;
+	}
+	
+    public void changeFail() {
+    	if(this.flagFail == true) {
+    		this.flagFail = false;
+    	}
+    	else {
+    		this.flagFail = true;
+    	}
+    }
+    
+    public boolean getFailFlag() {
+    	return this.flagFail;
+    }
 
 }

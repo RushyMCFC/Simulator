@@ -11,6 +11,7 @@ import model.Heart;
 import model.MyThreadStart;
 import model.Outputs;
 import model.Pacemaker;
+import model.RunnablePacemaker;
 
 
 public class ViewMain extends JFrame {
@@ -26,6 +27,7 @@ public class ViewMain extends JFrame {
     JSplitPane jssp,jssp1,jssp2;
     
     JPanel pacemakerModePanel,heartDiseasePanel,dp_eb,up_down;
+    String rBattery = "";
     
 	Outputs t=new Outputs();
 	private static ViewMain a= new ViewMain();
@@ -180,6 +182,22 @@ public class ViewMain extends JFrame {
             	deleteRate();
             }
         }); 
+		emptyBatteryButton.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {    int i;  
+            	edge();
+            	JLabel htime = new JLabel(new Date().toString());
+            	jp3.add(htime);
+            	JLabel failBattery=new JLabel("battery fail");
+            	jp3.add(failBattery);
+                //Execute when button is pressed
+            	
+            	deletePacemakerDetails();
+            	
+            	obj2.changeFail();
+            }
+        });  
 		
 		//add accessory
 		this.add(jssp2);
@@ -241,7 +259,13 @@ public class ViewMain extends JFrame {
 		int batteryLife = obj2.getBatteryLife();
 		String cMode = obj2.getMode();
 		JLabel pStatus = new JLabel("Pacemaker Status : "+status);
-		JLabel pBatteryLife = new JLabel("Battery Life : "+batteryLife+"%");
+		if(obj2.getBatteryLife() > 0) {
+			rBattery = "";
+		}
+		else {
+			rBattery = "Battery on Reserve (5 hours left)";
+		}
+		JLabel pBatteryLife = new JLabel("Battery Life : "+batteryLife+"% "+rBattery);
 		JLabel currentMode = new JLabel("Current Mode : "+cMode);
 		JLabel modeDetails = new JLabel("Details : "+obj2.getModeDetails());
 		pacemakerPanel.add(jlb5);
@@ -250,6 +274,10 @@ public class ViewMain extends JFrame {
 		pacemakerPanel.add(currentMode);
 		pacemakerPanel.add(modeDetails);
 	}
+	
+	
+	
+	
 	
 	public void deleteRate() {
 		heartDetailsPanel.removeAll();
@@ -262,6 +290,7 @@ public class ViewMain extends JFrame {
 		refreshPacemaker();
 		validate();
 	}
+	
 	private void edge()
 	{
 		if(jp3.getComponentCount()>=20)

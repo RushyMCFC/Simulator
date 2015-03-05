@@ -14,6 +14,9 @@ public interface PacemakerInterface {
     public String getStatus();
     public void setStatus();
     public ArrayList<String> getModes();
-
+    public void decreaseBatteryLife();
+    public void changeFail();
+    public boolean getFailFlag();
+    
     }
 
