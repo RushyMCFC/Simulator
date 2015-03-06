@@ -110,26 +110,32 @@ public class Pacemaker implements PacemakerInterface {
     }
     public void failLead1()
     {
-    	
+    	this.setMode("None");
     }
 
     public void failLead2()
     {
-    	
+    	this.setMode("None");
     }
     public void changeLeadStatus(int lead)
     {
     	if(lead==1)
     	{
-    		if(this.leadStatus1.equals("on")) 
+    		if(this.leadStatus1.equals("on"))
+    		{
     			this.leadStatus1 = "off";
+    			this.failLead1();
+    		}
     		else
     			this.leadStatus1= "on";
     	}
     	else if(lead==2)
     	{
     		if(this.leadStatus2.equals("on")) 
+    		{
     			this.leadStatus2 = "off";
+    			this.failLead2();
+    		}
     		else
     			this.leadStatus2= "on";
     	}
@@ -142,7 +148,7 @@ public class Pacemaker implements PacemakerInterface {
     		return this.leadStatus1;
     	else if(lead==2)
     		return this.leadStatus2;
-    	else throw new IllegalArgumentException("Incoorect lead input");
+    	else throw new IllegalArgumentException("Incorrect lead input");
     	
     
     }
