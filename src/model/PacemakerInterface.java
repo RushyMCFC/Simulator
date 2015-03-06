@@ -17,6 +17,9 @@ public interface PacemakerInterface {
     public void decreaseBatteryLife();
     public void changeFail();
     public boolean getFailFlag();
-    
+    public void failLead1();
+    public void failLead2();
+    public void changeLeadStatus(int lead);
+    public String getLeadStatus(int lead);
     }
 

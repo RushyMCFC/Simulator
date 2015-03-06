@@ -11,7 +11,9 @@ public class Pacemaker implements PacemakerInterface {
     private ArrayList<String> modes;
     private String status;
     private boolean flagFail = true;
-private String status1;
+    private String status1;
+    private String leadStatus1;
+    private String leadStatus2;
     private Pacemaker()
     {
         this.modes = new ArrayList<String>();
@@ -23,6 +25,8 @@ private String status1;
         this.mode = "None";
     	this.batteryLife=100;
     	this.status1 = "Not Active";
+    	this.leadStatus1 = "on";
+    	this.leadStatus2 = "on";
     }
 
     public int getBatteryLife() {
@@ -104,5 +108,40 @@ private String status1;
     public boolean getFailFlag() {
     	return this.flagFail;
     }
+    public void failLead1()
+    {
+    	
+    }
 
+    public void failLead2()
+    {
+    	
+    }
+    public void changeLeadStatus(int lead)
+    {
+    	if(lead==1)
+    	{
+    		if(this.leadStatus1.equals("on")) 
+    			this.leadStatus1 = "off";
+    		else
+    			this.leadStatus1= "on";
+    	}
+    	else if(lead==2)
+    		if(this.leadStatus1.equals("on")) 
+    			this.leadStatus2 = "off";
+    		else
+    			this.leadStatus2= "on";
+    	else
+    		throw new IllegalArgumentException("Incorrect lead input");
+    }
+    public String getLeadStatus(int lead)
+    {
+    	if(lead==1)
+    		return this.leadStatus1;
+    	else if(lead==2)
+    		return this.leadStatus2;
+    	else throw new IllegalArgumentException("Incoorect lead input");
+    	
+    
+    }
 }
