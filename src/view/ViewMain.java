@@ -52,7 +52,7 @@ public class ViewMain extends JFrame {
 		jp3=new JPanel();
         jp3.setLayout(new BoxLayout(jp3, BoxLayout.Y_AXIS));
 		heartDetailsPanel=new JPanel(new GridLayout(5,1));
-		pacemakerPanel=new JPanel(new GridLayout(5,1));
+		pacemakerPanel=new JPanel(new GridLayout(7,1));
 		
 		actionLabel=new JLabel("Actions");
 		detachPacemakerButton =new JButton ("Attach / Detach pacemaker");
@@ -268,11 +268,30 @@ public class ViewMain extends JFrame {
 		JLabel pBatteryLife = new JLabel("Battery Life : "+batteryLife+"% "+rBattery);
 		JLabel currentMode = new JLabel("Current Mode : "+cMode);
 		JLabel modeDetails = new JLabel("Details : "+obj2.getModeDetails());
+		
+		JPanel lead1 = new JPanel(new GridLayout(1,3));
+		JLabel lead1Name = new JLabel("Lead 1 : ");
+		JLabel lead1Status = obj2.getLeadStatus(1);
+		JButton lead1Button = new JButton("Fail");
+		lead1.add(lead1Name);
+		lead1.add(lead1Status);
+		lead1.add(lead1Button);
+		
+		JPanel lead2 = new JPanel(new GridLayout(1,3));
+		JLabel lead2Name = new JLabel("Lead 1 : ");
+		JLabel lead2Status = obj2.getLeadStatus(2);
+		JButton lead2Button = new JButton("Fail");
+		lead2.add(lead2Name);
+		lead2.add(lead2Status);
+		lead2.add(lead2Button);
+		
 		pacemakerPanel.add(jlb5);
 		pacemakerPanel.add(pStatus);
 		pacemakerPanel.add(pBatteryLife);
 		pacemakerPanel.add(currentMode);
 		pacemakerPanel.add(modeDetails);
+		pacemakerPanel.add(lead1);
+		pacemakerPanel.add(lead2);
 	}
 	
 	
