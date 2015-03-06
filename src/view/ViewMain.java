@@ -28,6 +28,8 @@ public class ViewMain extends JFrame {
     
     JPanel pacemakerModePanel,heartDiseasePanel,dp_eb,up_down;
     String rBattery = "";
+    JButton lead1Button = new JButton("Switch");
+    JButton lead2Button = new JButton("Switch");
     
 	Outputs t=new Outputs();
 	private static ViewMain a= new ViewMain();
@@ -182,6 +184,7 @@ public class ViewMain extends JFrame {
             	deleteRate();
             }
         }); 
+		
 		emptyBatteryButton.addActionListener(new ActionListener() {
 			 
             public void actionPerformed(ActionEvent e)
@@ -198,6 +201,24 @@ public class ViewMain extends JFrame {
             	obj2.changeFail();
             }
         });  
+		
+		lead1Button.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {      
+            	obj2.changeLeadStatus(1);
+            	deletePacemakerDetails();
+            }
+        });  
+		
+		lead2Button.addActionListener(new ActionListener() {
+			 
+            public void actionPerformed(ActionEvent e)
+            {      
+            	obj2.changeLeadStatus(2);
+            	deletePacemakerDetails();
+            }
+        }); 
 		
 		//add accessory
 		this.add(jssp2);
@@ -271,16 +292,14 @@ public class ViewMain extends JFrame {
 		
 		JPanel lead1 = new JPanel(new GridLayout(1,3));
 		JLabel lead1Name = new JLabel("Lead 1 : ");
-		JLabel lead1Status = obj2.getLeadStatus(1);
-		JButton lead1Button = new JButton("Fail");
+		JLabel lead1Status = new JLabel(obj2.getLeadStatus(1));
 		lead1.add(lead1Name);
 		lead1.add(lead1Status);
 		lead1.add(lead1Button);
 		
 		JPanel lead2 = new JPanel(new GridLayout(1,3));
-		JLabel lead2Name = new JLabel("Lead 1 : ");
-		JLabel lead2Status = obj2.getLeadStatus(2);
-		JButton lead2Button = new JButton("Fail");
+		JLabel lead2Name = new JLabel("Lead 2 : ");
+		JLabel lead2Status = new JLabel(obj2.getLeadStatus(2));
 		lead2.add(lead2Name);
 		lead2.add(lead2Status);
 		lead2.add(lead2Button);
@@ -293,9 +312,6 @@ public class ViewMain extends JFrame {
 		pacemakerPanel.add(lead1);
 		pacemakerPanel.add(lead2);
 	}
-	
-	
-	
 	
 	
 	public void deleteRate() {

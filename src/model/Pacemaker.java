@@ -127,10 +127,12 @@ public class Pacemaker implements PacemakerInterface {
     			this.leadStatus1= "on";
     	}
     	else if(lead==2)
-    		if(this.leadStatus1.equals("on")) 
+    	{
+    		if(this.leadStatus2.equals("on")) 
     			this.leadStatus2 = "off";
     		else
     			this.leadStatus2= "on";
+    	}
     	else
     		throw new IllegalArgumentException("Incorrect lead input");
     }
